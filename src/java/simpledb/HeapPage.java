@@ -45,11 +45,14 @@ public class HeapPage implements Page {
         DataInputStream dis = new DataInputStream(new ByteArrayInputStream(data));
 
         // allocate and read the header slots of this page
+        //读取header
         header = new byte[getHeaderSize()];
         for (int i=0; i<header.length; i++)
+            //1 bit header说明数据是否有效
             header[i] = dis.readByte();
 
         tuples = new Tuple[numSlots];
+        //读取tuples
         try{
             // allocate and read the actual records of this page
             for (int i=0; i<tuples.length; i++)
@@ -67,6 +70,7 @@ public class HeapPage implements Page {
     */
     private int getNumTuples() {
         // some code goes here
+        //根据数据结构获得tuple大小（题目假设所有tuple大小一致）
         int tupleSize = this.td.getSize();
         return (int) Math.floor((BufferPool.getPageSize()*8)/(tupleSize*8+1));
     }
@@ -75,8 +79,7 @@ public class HeapPage implements Page {
      * Computes the number of bytes in the header of a page in a HeapFile with each tuple occupying tupleSize bytes
      * @return the number of bytes in the header of a page in a HeapFile with each tuple occupying tupleSize bytes
      */
-    private int getHeaderSize() {        
-        
+    public int getHeaderSize() {
         // some code goes here
         return (int) Math.ceil(this.getNumTuples()/8);
     }
@@ -244,6 +247,7 @@ public class HeapPage implements Page {
     public void deleteTuple(Tuple t) throws DbException {
         // some code goes here
         // not necessary for lab1
+
     }
 
     /**
@@ -280,15 +284,33 @@ public class HeapPage implements Page {
      * Returns the number of empty slots on this page.
      */
     public int getNumEmptySlots() {
-        // some code goes here
-        return 0;
+        int numEmpty = 0;
+        int headerBit = getHeaderSize() * 8;
+        for (int i = 0; i < headerBit; i++) {
+            if (getValidBit(i) == 0)
+                numEmpty++;
+        }
+        return numEmpty;
     }
 
     /**
      * Returns true if associated slot on this page is filled.
      */
+    private int getValidBit(int i) {
+        int byteIndex = i / 8;
+        int bitIndex = i % 8;
+        //需要将读取header bit的函数单独拆出，方便其他方法使用
+        String validNum = String.format("%8s", Integer.toBinaryString(header[byteIndex]))
+                .replace(' ', '0');
+        return Integer.parseInt(String.
+                valueOf(validNum.charAt(7-bitIndex)));
+    }
+
     public boolean isSlotUsed(int i) {
         // some code goes here
+        int validBit = getValidBit(i);
+        if (validBit == 1)
+            return true;
         return false;
     }
 
@@ -304,10 +326,41 @@ public class HeapPage implements Page {
      * @return an iterator over all tuples on this page (calling remove on this iterator throws an UnsupportedOperationException)
      * (note that this iterator shouldn't return tuples in empty slots!)
      */
+    //make an auxilary class for iterator
     public Iterator<Tuple> iterator() {
         // some code goes here
-        return null;
+        return new HeapPageIterator();
+    }
+    //基本逻辑：
+    //hasNext判断后面是否还有validBit为1的tuple
+    //next移动到下一个validBit为1的tuple
+    private class HeapPageIterator implements Iterator<Tuple> {
+        private Tuple curr = null;
+        private final int totalTuple = getNumTuples();
+        private final int validTuple = getNumTuples()-getNumEmptySlots();//计算有多少个有效tuple
+        private int visitedTuple = 0;//记录已经访问的tuple个数，等于validTuple时hasNext()返回false
+        private int currPosition = -1;
+
+        public boolean hasNext() {
+            return (visitedTuple < validTuple);
+        }
+
+        public Tuple next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            for (int i = currPosition+1; i < totalTuple; i++) {
+                if (getValidBit(i) == 1) {//更新curr，currPosition，visitedTuple
+                    currPosition = i;
+                    visitedTuple++;
+                    curr = tuples[i];
+                    break;
+                }
+            }
+            return curr;
+        }
     }
 
+    public static void main(String[] args) {
+        System.out.println(String.format("%-[L]s", Integer.toBinaryString(15)).replace(' ', '0'));
+    }
 }
 
