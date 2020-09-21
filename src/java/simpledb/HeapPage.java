@@ -358,9 +358,5 @@ public class HeapPage implements Page {
             return curr;
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(String.format("%-[L]s", Integer.toBinaryString(15)).replace(' ', '0'));
-    }
 }
 

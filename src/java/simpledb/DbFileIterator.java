@@ -21,7 +21,6 @@ public interface DbFileIterator{
      * Gets the next tuple from the operator (typically implementing by reading
      * from a child operator or an access method).
      *
-     * @return The next tuple in the iterator.
      * @throws NoSuchElementException if there are no more tuples
      */
     public Tuple next()
