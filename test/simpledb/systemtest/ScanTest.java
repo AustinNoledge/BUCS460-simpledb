@@ -27,6 +27,8 @@ public class ScanTest extends SimpleDbTestBase {
             throws IOException, DbException, TransactionAbortedException {
         for (int columns : columnSizes) {
             for (int rows : rowSizes) {
+                //二维数组
+                System.out.println(columns + " " + rows);
                 ArrayList<ArrayList<Integer>> tuples = new ArrayList<ArrayList<Integer>>();
                 HeapFile f = SystemTestUtil.createRandomHeapFile(columns, rows, null, tuples);
                 SystemTestUtil.matchTuples(f, tuples);
@@ -37,7 +39,7 @@ public class ScanTest extends SimpleDbTestBase {
 
     /** Scan 1-4 columns. */
     @Test public void testSmall() throws IOException, DbException, TransactionAbortedException {
-        int[] columnSizes = new int[]{1, 2, 3, 4};
+        int[] columnSizes = new int[]{1,2,3};
         int[] rowSizes =
                 new int[]{0, 1, 2, 511, 512, 513, 1023, 1024, 1025, 4096 + r.nextInt(4096)};
         validateScan(columnSizes, rowSizes);

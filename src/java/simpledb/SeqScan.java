@@ -19,7 +19,7 @@ public class SeqScan implements DbIterator {
      *            The transaction this scan is running as a part of.
      * @param tableid
      *            the table to scan.
-     * @param tableAlias
+     * @param tableAlias（关于每个field的更加可读的名称）
      *            the alias of this table (needed by the parser); the returned
      *            tupleDesc should have fields with name tableAlias.fieldName
      *            (note: this class is not responsible for handling a case where
@@ -27,8 +27,20 @@ public class SeqScan implements DbIterator {
      *            are, but the resulting name can be null.fieldName,
      *            tableAlias.null, or null.null).
      */
+    //测试阶段：不知道需要什么field（全部声明）
+    public TransactionId tid;
+    public int tableid;
+    public String tableAlias;
+    public DbFile table;
+    public DbFileIterator it = null;
+
     public SeqScan(TransactionId tid, int tableid, String tableAlias) {
         // some code goes here
+        this.tid = tid;
+        this.tableid = tableid;
+        this.tableAlias = tableAlias;
+        this.table = Database.getCatalog().getDatabaseFile(tableid);
+        this.it = table.iterator(tid);
     }
 
     /**
@@ -37,7 +49,7 @@ public class SeqScan implements DbIterator {
      *       be the actual name of the table in the catalog of the database
      * */
     public String getTableName() {
-        return null;
+        return Database.getCatalog().getTableName(this.tableid);
     }
 
     /**
@@ -46,7 +58,7 @@ public class SeqScan implements DbIterator {
     public String getAlias()
     {
         // some code goes here
-        return null;
+        return this.tableAlias;
     }
 
     /**
@@ -63,14 +75,13 @@ public class SeqScan implements DbIterator {
      */
     public void reset(int tableid, String tableAlias) {
         // some code goes here
+        this.tableid = tableid;
+        this.tableAlias = tableAlias;
     }
 
+    //默认tableAlias的constructor
     public SeqScan(TransactionId tid, int tableid) {
         this(tid, tableid, Database.getCatalog().getTableName(tableid));
-    }
-
-    public void open() throws DbException, TransactionAbortedException {
-        // some code goes here
     }
 
     /**
@@ -83,28 +94,45 @@ public class SeqScan implements DbIterator {
      * @return the TupleDesc with field names from the underlying HeapFile,
      *         prefixed with the tableAlias string from the constructor.
      */
+    //TupleDesc的constructor：TupleDesc(Type[] typeAr, String[] fieldAr)
+    //SeqScan的constructor：SeqScan(TransactionId tid, int tableid, String tableAlias)
     public TupleDesc getTupleDesc() {
         // some code goes here
-        return null;
+        TupleDesc desc = this.table.getTupleDesc();//根据DbFile获取TupleDesc
+        Type[] typeArr = desc.getFieldTypeArr();//直接获取Type数组
+
+        String[] nameArr = desc.getFieldNameArr().clone();//直接复制Nanme数组，然后每个元素添加alias.
+        for (int i = 0; i < desc.numFields(); i++) {
+            nameArr[i] = getAlias() + "." + nameArr[i];
+        }
+        return new TupleDesc(typeArr, nameArr);
     }
 
+    //这里开始，所有iterator相关函数全部直接使用HeapFile的
+    //理由，两者目的相同：都是遍历HeapFile内所有tuples
+    public void open() throws DbException, TransactionAbortedException {
+        // some code goes here
+        it.open();
+    }
     public boolean hasNext() throws TransactionAbortedException, DbException {
         // some code goes here
-        return false;
+        return it.hasNext();
     }
 
     public Tuple next() throws NoSuchElementException,
             TransactionAbortedException, DbException {
         // some code goes here
-        return null;
+        return it.next();
     }
 
     public void close() {
         // some code goes here
+        it.close();
     }
 
     public void rewind() throws DbException, NoSuchElementException,
             TransactionAbortedException {
         // some code goes here
+        it.rewind();
     }
 }

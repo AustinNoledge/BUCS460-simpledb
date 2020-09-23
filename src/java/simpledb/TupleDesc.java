@@ -2,6 +2,7 @@ package simpledb;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -130,6 +131,14 @@ public class TupleDesc implements Serializable {
     public Type getFieldType(int i) throws NoSuchElementException {
         // some code goes here
         return desc.get(i).fieldType;
+    }
+
+    public Type[] getFieldTypeArr() throws NoSuchElementException {
+        return this.typeArr;
+    }
+
+    public String[] getFieldNameArr() throws NoSuchElementException {
+        return this.fieldArr;
     }
 
     /**

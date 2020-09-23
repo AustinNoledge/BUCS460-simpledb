@@ -22,7 +22,6 @@ public class HeapFile implements DbFile {
      *            the file that stores the on-disk backing store for this heap
      *            file.
      */
-    //测试阶段（不知道需要什么结构）
     public File file;
     public RandomAccessFile raf;
     public TupleDesc tupleDesc;
@@ -182,12 +181,16 @@ public class HeapFile implements DbFile {
 
         @Override
         public void rewind() throws DbException, TransactionAbortedException {
-
+            close();
+            open();
         }
 
         @Override
         public void close() {
             open = false;
+            this.currPos = 0;
+            this.currPage = null;
+            this.it = null;
         }
 
         //hasNext()
