@@ -12,21 +12,17 @@ public class TupleDesc implements Serializable {
 
     /**
      * A help class to facilitate organizing the information of each field
+     * TDItem记录了每个field的类型和名称
      * */
     public static class TDItem implements Serializable {
 
         private static final long serialVersionUID = 1L;
 
-        /**
-         * The type of the field
-         * */
-        public final Type fieldType;
+        public final Type fieldType;//类型
 
-        /**
-         * The name of the field
-         * */
-        public final String fieldName;
+        public final String fieldName;//名称
 
+        //构造函数
         public TDItem(Type t, String n) {
             this.fieldType = t;
             this.fieldName = n;
@@ -35,9 +31,10 @@ public class TupleDesc implements Serializable {
         public String toString() {
             return fieldName + "(" + fieldType + ")";
         }
-    }
+    }//end of TDItem class
 
     /**
+     * 迭代器
      * @return
      *        An iterator which iterates over all the field TDItems
      *        that are included in this TupleDesc
@@ -53,6 +50,9 @@ public class TupleDesc implements Serializable {
      * Create a new TupleDesc with typeAr.length fields with fields of the
      * specified types, with associated named fields.
      *
+     * 用arraylist储存每个field（TDItem）
+     * 再用两个数组分别储存类型和名称
+     *
      * @param typeAr
      *            array specifying the number of and types of fields in this
      *            TupleDesc. It must contain at least one entry.
@@ -60,7 +60,6 @@ public class TupleDesc implements Serializable {
      *            array specifying the names of the fields. Note that names may
      *            be null.
      */
-    //直冲arraylist
     public ArrayList<TDItem> desc;
     public Type[] typeArr;
     public String[] fieldArr;
@@ -69,9 +68,8 @@ public class TupleDesc implements Serializable {
         // some code goes here
         desc = new ArrayList<TDItem>();
         for (int i = 0; i < typeAr.length; i++) {
-            TDItem obj = new TDItem(typeAr[i], fieldAr[i]);
-            desc.add(obj);
-        }
+            desc.add(new TDItem(typeAr[i], fieldAr[i]));
+        }//循环遍历，向desc添加TDItem对象
         this.typeArr = typeAr;
         this.fieldArr = fieldAr;
     }

@@ -3,6 +3,8 @@ package simpledb;
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -32,12 +34,12 @@ public class BufferPool {
      *
      * @param numPages maximum number of pages in this buffer pool.
      */
-    public ArrayList<Page> pages;
+    public Map<PageId, Page> bufferPool;
     public int maxPages;
 
     public BufferPool(int numPages) {
         // some code goes here
-        pages = new ArrayList<>();
+        bufferPool = new HashMap<PageId, Page>();
         maxPages = numPages;
     }
     
@@ -76,20 +78,18 @@ public class BufferPool {
     public  Page getPage(TransactionId tid, PageId pid, Permissions perm)
         throws TransactionAbortedException, DbException {
         // some code goes here
-        for (Page page : pages) {
-            if (page.getId() == pid) {
-                return page;
-            }
-        }
-        //没有空间
-        if (pages.size() == maxPages) {
-            throw new DbException("insufficient space");
-        }
+        //直接找到
+        if (bufferPool.containsKey(pid)) return bufferPool.get(pid);
+        //没有找到
+        //没有空间，抛出异常
+        if (bufferPool.size() >= maxPages) throw new DbException("insuffient space");
         //添加页面
         int tableid = pid.getTableId();
         DbFile file = Database.getCatalog().getDatabaseFile(tableid);
         Page newPage = file.readPage(pid);
-        this.pages.add(newPage);
+        this.bufferPool.put(pid, newPage);
+        //再次检查
+        if (bufferPool.size() > maxPages) throw new DbException("more than maxPage");
         return newPage;
     }
 

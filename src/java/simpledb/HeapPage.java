@@ -334,6 +334,7 @@ public class HeapPage implements Page {
     //基本逻辑：
     //hasNext判断后面是否还有validBit为1的tuple
     //next移动到下一个validBit为1的tuple
+    /**
     private class HeapPageIterator implements Iterator<Tuple> {
         private Tuple curr = null;
         private final int totalTuple = getNumTuples();
@@ -356,6 +357,31 @@ public class HeapPage implements Page {
                 }
             }
             return curr;
+        }
+    }
+     */
+    private class HeapPageIterator implements Iterator<Tuple> {
+        private int currPos;
+
+        public HeapPageIterator() {
+            currPos = 0;
+        }
+
+        public boolean hasNext() {
+            for (int i = currPos; i < numSlots; i++) {
+                if (isSlotUsed(i)) {
+                    currPos = i;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Tuple next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            Tuple t = tuples[currPos];
+            currPos++;
+            return t;
         }
     }
 }

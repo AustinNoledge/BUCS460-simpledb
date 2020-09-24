@@ -29,7 +29,7 @@ public class HeapFile implements DbFile {
         // some code goes here
         this.file = f;
         try {
-            this.raf = new RandomAccessFile(file, "rw");
+            this.raf = new RandomAccessFile(file, "r");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -77,7 +77,7 @@ public class HeapFile implements DbFile {
         byte[] readInfo = new byte[BufferPool.getPageSize()];
         try {
             raf.seek(offset);
-            int byteRead = raf.read(readInfo);
+            raf.read(readInfo, 0, readInfo.length);
             HeapPageId hid = new HeapPageId(getId(), pid.pageNumber());
             Page pg = new HeapPage(hid, readInfo);
             return pg;
@@ -137,13 +137,14 @@ public class HeapFile implements DbFile {
         public int currPos;//当前页面位置
         public HeapPage currPage;
         public Iterator<Tuple> it;//当前页面iterator
-        public boolean open = false;
+        public boolean open;
 
         //constructor
         public HeapFileIterator(TransactionId tid, Permissions perm) {
             this.tid = tid;
             this.perm = perm;
             currPos = 0;
+            open = false;
         }
 
         @Override
@@ -165,7 +166,7 @@ public class HeapFile implements DbFile {
         public boolean hasNext() throws DbException, TransactionAbortedException {
             if (!open) return false;
             if (it.hasNext()) return true;
-            while (currPos < numPages()) {
+            while (currPos < numPages()-1) {
                 currPos++;
                 open();
                 if (it.hasNext()) return true;
