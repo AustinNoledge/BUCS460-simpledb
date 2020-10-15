@@ -74,7 +74,6 @@ public class BufferPool {
      */
     //不确定正确性！！！（没有测试）
     //permission确定只读或者读写
-    //疑问：可以自己生成catalog去读DbFile？？？（如果不行，添加部分需要重写）
     public  Page getPage(TransactionId tid, PageId pid, Permissions perm)
         throws TransactionAbortedException, DbException {
         // some code goes here
