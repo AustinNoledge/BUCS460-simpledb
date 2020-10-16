@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -72,15 +73,21 @@ public class BufferPool {
      * @param pid the ID of the requested page
      * @param perm the requested permissions on the page
      */
-    //不确定正确性！！！（没有测试）
-    //permission确定只读或者读写
     public  Page getPage(TransactionId tid, PageId pid, Permissions perm)
         throws TransactionAbortedException, DbException {
         // some code goes here
         //直接找到
         if (bufferPool.containsKey(pid)) return bufferPool.get(pid);
         //没有找到
-        //没有空间，抛出异常
+        //eviction
+        while (bufferPool.size() >= maxPages) {
+            this.evictPage();
+        }
+        //adding
+        Page page = Database.getCatalog().getDatabaseFile((pid.getTableId())).readPage(pid);
+        bufferPool.putIfAbsent(pid, page);
+        return page;
+        /**
         if (bufferPool.size() >= maxPages) throw new DbException("insuffient space");
         //添加页面
         int tableid = pid.getTableId();
@@ -90,6 +97,7 @@ public class BufferPool {
         //再次检查
         if (bufferPool.size() > maxPages) throw new DbException("more than maxPage");
         return newPage;
+         */
     }
 
     /**
@@ -184,7 +192,15 @@ public class BufferPool {
     public synchronized void flushAllPages() throws IOException {
         // some code goes here
         // not necessary for lab1
-
+        bufferPool.forEach((k, v) -> {
+          if (v.isDirty() != null) {
+              try {
+                  flushPage(k);
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+          }
+        });
     }
 
     /** Remove the specific page id from the buffer pool.
@@ -207,6 +223,13 @@ public class BufferPool {
     private synchronized  void flushPage(PageId pid) throws IOException {
         // some code goes here
         // not necessary for lab1
+        Page page = bufferPool.get(pid);
+        try {
+            Database.getCatalog().getDatabaseFile(pid.getTableId()).writePage(page);
+            page.markDirty(false, null);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
     }
 
     /** Write all pages of the specified transaction to disk.
@@ -221,8 +244,13 @@ public class BufferPool {
      * Flushes the page to disk to ensure dirty pages are updated on disk.
      */
     private synchronized  void evictPage() throws DbException {
-        // some code goes here
-        // not necessary for lab1
+        //逻辑：选择位于中间的页面，try flush and then evict from the map
+        HeapPageId removeId = (HeapPageId) bufferPool.keySet().toArray()[bufferPool.size()/2];
+        try {
+            flushPage(removeId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bufferPool.remove(removeId);
     }
-
 }

@@ -14,10 +14,12 @@ import java.io.*;
 public class HeapPage implements Page {
 
     final HeapPageId pid;
+    TransactionId tid;
     final TupleDesc td;
     final byte header[];
     final Tuple tuples[];
     final int numSlots;
+    boolean isDirty;
 
     byte[] oldData;
     private final Byte oldDataLock=new Byte((byte)0);
@@ -269,6 +271,8 @@ public class HeapPage implements Page {
     public void markDirty(boolean dirty, TransactionId tid) {
         // some code goes here
 	// not necessary for lab1
+        this.isDirty = dirty;
+        this.tid = dirty? tid : null;
     }
 
     /**
@@ -277,7 +281,7 @@ public class HeapPage implements Page {
     public TransactionId isDirty() {
         // some code goes here
 	// Not necessary for lab1
-        return null;      
+        return isDirty? tid : null;
     }
 
     /**
