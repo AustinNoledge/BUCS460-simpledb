@@ -92,7 +92,6 @@ public class BTreeFileInsertTest extends SimpleDbTestBase {
 				empty.insertTuple(tid, tup);
 				// BTreeChecker.checkRep(empty, tid, new HashMap<PageId, Page>(), true);
 			}
-
 		}
 
 		BTreeChecker.checkRep(empty, tid, new HashMap<PageId, Page>(), true);
@@ -212,7 +211,8 @@ public class BTreeFileInsertTest extends SimpleDbTestBase {
 			fit.open();
 			boolean found = false;
 			while(fit.hasNext()) {
-				if(fit.next().equals(t)) {
+				Tuple test = fit.next();
+				if(test.equals(t)) {
 					found = true;
 					break;
 				}
