@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82662323-2b91-41db-9ab9-436e32beba50" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/simpledb/BufferPool.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/src/simpledb/BufferPool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/simpledb/systemtest/BTreeFileInsertTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/src/simpledb/systemtest/BTreeFileInsertTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/simpledb/BTreeFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/simpledb/BTreeFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/simpledb/BufferPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/simpledb/BufferPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/simpledb/HeapFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/simpledb/HeapFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/simpledb/systemtest/BTreeFileInsertTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/simpledb/systemtest/BTreeFileInsertTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/src/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,15 +36,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/simpledb/systemtest/BTreeFileInsertTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="205" column="33" selection-start-line="205" selection-start-column="33" selection-end-line="205" selection-end-column="33" />
+            <state relative-caret-position="315">
+              <caret line="213" column="40" lean-forward="true" selection-start-line="213" selection-start-column="40" selection-end-line="213" selection-end-column="40" />
               <folding>
                 <element signature="e#9371#9372#0" expanded="true" />
                 <element signature="e#9433#9434#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/simpledb/HeapFile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="112" column="24" selection-start-line="112" selection-start-column="24" selection-end-line="112" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -161,10 +164,10 @@
         <option value="$PROJECT_DIR$/src/java/simpledb/Page.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/BTreeFile1.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/Permissions.java" />
-        <option value="$PROJECT_DIR$/src/java/simpledb/HeapFile.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/BufferPool.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/BTreeFile.java" />
         <option value="$PROJECT_DIR$/test/simpledb/systemtest/BTreeFileInsertTest.java" />
+        <option value="$PROJECT_DIR$/src/java/simpledb/HeapFile.java" />
       </list>
     </option>
   </component>
@@ -371,9 +374,9 @@
       <list>
         <item itemvalue="JUnit.BTreeFileInsertTest" />
         <item itemvalue="JUnit.EvictionTest" />
-        <item itemvalue="JUnit.ScanTest" />
         <item itemvalue="JUnit.BTreeScanTest" />
         <item itemvalue="JUnit.BTreeFileInsertTest (1)" />
+        <item itemvalue="JUnit.ScanTest" />
       </list>
     </recent_temporary>
   </component>
@@ -402,23 +405,11 @@
       <workItem from="1601165587599" duration="599000" />
       <workItem from="1602797175740" duration="22545000" />
       <workItem from="1603138510966" duration="14512000" />
-      <workItem from="1603160560968" duration="16498000" />
+      <workItem from="1603160560968" duration="16636000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BTreeFileInsertTest_testSplitRootPage - 2020.10.20 at 14h 25m 22s.xml">
-      <configuration name="BTreeFileInsertTest.testSplitRootPage" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BTreeFileInsertTest_testSplitRootPage - 2020.10.20 at 14h 26m 12s.xml">
-      <configuration name="BTreeFileInsertTest.testSplitRootPage" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BTreeFileInsertTest_testSplitRootPage - 2020.10.20 at 14h 30m 40s.xml">
-      <configuration name="BTreeFileInsertTest.testSplitRootPage" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BTreeFileReadTest - 2020.10.20 at 14h 31m 11s.xml">
-      <configuration name="BTreeFileReadTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="BTreeFileInsertTest_(1) - 2020.10.20 at 14h 31m 20s.xml">
       <configuration name="BTreeFileInsertTest (1)" configurationId="JUnit" />
     </history-entry>
@@ -437,9 +428,21 @@
     <history-entry file="BTreeFileInsertTest - 2020.10.20 at 14h 32m 06s.xml">
       <configuration name="BTreeFileInsertTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="BTreeFileInsertTest_(1) - 2020.10.20 at 14h 34m 05s.xml">
+      <configuration name="BTreeFileInsertTest (1)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BTreeScanTest - 2020.10.20 at 14h 34m 10s.xml">
+      <configuration name="BTreeScanTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EvictionTest - 2020.10.20 at 14h 34m 17s.xml">
+      <configuration name="EvictionTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BTreeFileInsertTest - 2020.10.20 at 14h 34m 22s.xml">
+      <configuration name="BTreeFileInsertTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199584000" />
+    <option name="totallyTimeSpent" value="199722000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -452,7 +455,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Capture Tool" order="0" />
       <window_info id="Learn" order="1" />
@@ -839,16 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/simpledb/HeapFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="129" column="50" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
-          <folding>
-            <element signature="e#4996#5002#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/simpledb/BTreeUtility.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -993,12 +985,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/simpledb/systemtest/BTreeFileInsertTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="205" column="33" selection-start-line="205" selection-start-column="33" selection-end-line="205" selection-end-column="33" />
+        <state relative-caret-position="315">
+          <caret line="213" column="40" lean-forward="true" selection-start-line="213" selection-start-column="40" selection-end-line="213" selection-end-column="40" />
           <folding>
             <element signature="e#9371#9372#0" expanded="true" />
             <element signature="e#9433#9434#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/simpledb/HeapFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="112" column="24" selection-start-line="112" selection-start-column="24" selection-end-line="112" selection-end-column="24" />
         </state>
       </provider>
     </entry>

@@ -110,39 +110,7 @@ public class HeapFile implements DbFile {
     public ArrayList<Page> insertTuple(TransactionId tid, Tuple t)
             throws DbException, IOException, TransactionAbortedException {
         // some code goes here
-        int i = 0;
-        HeapPage hp = null;
-        int tableId = this.getId();
-        for (i = 0; i < numPages(); i ++) {
-            if (((HeapPage)(Database.getBufferPool().getPage(
-                    tid, new HeapPageId(tableId, i), Permissions.READ_ONLY))).getNumEmptySlots() > 0)
-                break;
-        }
-        if (i == numPages()) {
-            //System.out.println("Shit");
-            synchronized(this) {
-                i = numPages();
-                // All files are full
-                hp = new HeapPage(new HeapPageId(tableId, i), HeapPage.createEmptyPageData());
-                try {
-                    int pageSize = BufferPool.getPageSize();
-                    byte[] byteStream = hp.getPageData();
-                    RandomAccessFile raf = new RandomAccessFile(file, "rw");
-                    raf.seek(pageSize * i);
-                    raf.write(byteStream);
-                    raf.close();
-                }
-                catch (IOException e) {
-                    throw e;
-                }
-            }
-        }
-        hp = (HeapPage)(Database.getBufferPool().getPage(tid, new HeapPageId(tableId, i), Permissions.READ_WRITE));
-        hp.insertTuple(t);
-        //System.out.println("Tid is" + tid.toString() + " Insert Tuple is" + ((IntField)(t.getField(0))).getValue());
-        ArrayList<Page> pList = new ArrayList<Page>();
-        pList.add(hp);
-        return pList;
+            return null;
     }
 
     // see DbFile.java for javadocs
