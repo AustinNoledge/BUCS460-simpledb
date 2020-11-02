@@ -99,7 +99,14 @@ public class Tuple implements Serializable {
          */
         public String toString() {
             // some code goes here
-            throw new UnsupportedOperationException("Implement this");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < this.data.size(); i++) {
+                if (i > 0) {
+                    sb.append("\t");
+                }
+                sb.append(this.data.get(i));
+            }
+            return sb.toString();
     }
 
     /**
@@ -123,5 +130,24 @@ public class Tuple implements Serializable {
         }
         this.tDesc = td;
         rid = null;
+    }
+
+    /**
+     * Merge two Tuples into one
+     *
+     * @param tuple1 The first tuple
+     * @param tuple2 The second tuple
+     * @return the new Tuple
+     */
+    public static Tuple merge(Tuple tuple1, Tuple tuple2) {
+        Tuple newTuple = new Tuple(TupleDesc.merge(tuple1.getTupleDesc(), tuple2.getTupleDesc()));
+        for (int i = 0; i < tuple1.getTupleDesc().numFields(); i++) {
+            newTuple.setField(i, tuple1.getField(i));
+        }
+        int offset = tuple1.getTupleDesc().numFields();
+        for (int i = 0; i < tuple2.getTupleDesc().numFields(); i++) {
+            newTuple.setField(offset + i, tuple2.getField(i));
+        }
+        return newTuple;
     }
 }

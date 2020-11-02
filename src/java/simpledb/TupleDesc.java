@@ -58,7 +58,6 @@ public class TupleDesc implements Serializable {
      *            be null.
      */
     public ArrayList<TDItem> desc;
-    private boolean anonymous;//判断field是否匿名
     public Type[] typeArr;
     public String[] fieldArr;
 
@@ -68,7 +67,6 @@ public class TupleDesc implements Serializable {
         for (int i = 0; i < typeAr.length; i++) {//循环遍历，向desc添加TDItem对象
             desc.add(new TDItem(typeAr[i], fieldAr[i]));
         }
-        anonymous = false;
         this.typeArr = typeAr;
         this.fieldArr = fieldAr;
     }
@@ -91,7 +89,6 @@ public class TupleDesc implements Serializable {
         for (int i = 0; i < typeAr.length; i++) {
             desc.add(new TDItem(typeAr[i], null));
         }
-        anonymous = true;
         this.typeArr = typeAr;
         this.fieldArr = null;
     }
@@ -142,7 +139,6 @@ public class TupleDesc implements Serializable {
     }
 
     public String[] getFieldNameArr() {
-        if (anonymous == true) throw new NoSuchElementException("no name");
         String[] name = new String[numFields()];
         for (int i = 0; i < numFields(); i++) {
             name[i] = desc.get(i).fieldName;
@@ -204,7 +200,7 @@ public class TupleDesc implements Serializable {
         merge.addAll(td1.desc);
         return new TupleDesc(merge);
     }
-    public static TupleDesc merge(TupleDesc td1, TupleDesc td2) {
+    public static TupleDesc merge2(TupleDesc td1, TupleDesc td2) {
         // some code goes here
         Type[] mergeType = new Type[td1.typeArr.length + td2.typeArr.length];
         String[] mergeName = new String[td1.fieldArr.length + td2.fieldArr.length];
@@ -225,6 +221,22 @@ public class TupleDesc implements Serializable {
             }
         }
         return new TupleDesc(mergeType, mergeName);
+    }
+
+    public static TupleDesc merge(TupleDesc td1, TupleDesc td2) {
+        // some code goes here
+        Type[] types = new Type[td1.numFields() + td2.numFields()];
+        String[] fields = new String[td1.numFields() + td2.numFields()];
+        for (int i = 0; i < td1.numFields(); i++) {
+            types[i] = td1.getFieldType(i);
+            fields[i] = td1.getFieldName(i);
+        }
+        int offset = td1.numFields();
+        for (int i = 0; i < td2.numFields(); i++) {
+            types[offset + i] = td2.getFieldType(i);
+            fields[offset + i] = td2.getFieldName(i);
+        }
+        return new TupleDesc(types, fields);
     }
 
     /**

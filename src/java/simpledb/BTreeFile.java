@@ -274,7 +274,6 @@ public class BTreeFile implements DbFile {
 		// moving half
 		int half = page.getNumTuples() / 2;
 		while (count < half) {
-			if (!it.hasNext()) throw new DbException("incorrect amount of tuples");
 			Tuple currTuple = it.next();
 			page.deleteTuple(currTuple);
 			newPage.insertTuple(currTuple);
