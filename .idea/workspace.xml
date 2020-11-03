@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82662323-2b91-41db-9ab9-436e32beba50" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/depcache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/depcache/dependencies.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/simpledb/BTreeFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/src/simpledb/BTreeFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/simpledb/BTreeFileIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/src/simpledb/BTreeFileIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/simpledb/BTreeSearchIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/src/simpledb/BTreeSearchIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/src/simpledb/systemtest/BTreeFileDeleteTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/simpledb/BTreeFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/simpledb/BTreeFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/simpledb/Tuple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/simpledb/Tuple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/simpledb/TupleDesc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/simpledb/TupleDesc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/simpledb/systemtest/BTreeFileDeleteTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/simpledb/HashEquiJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/simpledb/HashEquiJoin.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/src/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,41 +78,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/simpledb/HashEquiJoin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="145">
+              <caret line="157" column="31" lean-forward="true" selection-start-line="157" selection-start-column="31" selection-end-line="157" selection-end-column="31" />
               <folding>
                 <element signature="e#1589#1615#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/simpledb/TupleDesc.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="142" column="47" lean-forward="true" selection-start-line="142" selection-start-column="47" selection-end-line="142" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/simpledb/SeqScan.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/simpledb/Tuple.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -198,8 +162,8 @@
         <option value="$PROJECT_DIR$/src/java/simpledb/Tuple.java" />
         <option value="$PROJECT_DIR$/test/simpledb/JoinTest.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/Join.java" />
-        <option value="$PROJECT_DIR$/src/java/simpledb/HashEquiJoin.java" />
         <option value="$PROJECT_DIR$/src/java/simpledb/TupleDesc.java" />
+        <option value="$PROJECT_DIR$/src/java/simpledb/HashEquiJoin.java" />
       </list>
     </option>
   </component>
@@ -413,9 +377,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.HashEquiJoinTest (1)" />
+        <item itemvalue="JUnit.HashEquiJoinTest" />
         <item itemvalue="JUnit.JoinTest (1)" />
         <item itemvalue="JUnit.FilterTest" />
-        <item itemvalue="JUnit.HashEquiJoinTest" />
         <item itemvalue="JUnit.JoinTest" />
       </list>
     </recent_temporary>
@@ -447,32 +411,11 @@
       <workItem from="1603138510966" duration="14512000" />
       <workItem from="1603160560968" duration="18378000" />
       <workItem from="1604221169411" duration="369000" />
-      <workItem from="1604336171028" duration="15082000" />
+      <workItem from="1604336171028" duration="16230000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="JoinTest_gtJoin - 2020.11.02 at 14h 32m 05s.xml">
-      <configuration name="JoinTest.gtJoin" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JoinTest_gtJoin - 2020.11.02 at 15h 05m 54s.xml">
-      <configuration name="JoinTest.gtJoin" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JoinTest_gtJoin - 2020.11.02 at 15h 07m 10s.xml">
-      <configuration name="JoinTest.gtJoin" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JoinTest_gtJoin - 2020.11.02 at 15h 08m 43s.xml">
-      <configuration name="JoinTest.gtJoin" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JoinTest - 2020.11.02 at 15h 08m 49s.xml">
-      <configuration name="JoinTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="HashEquiJoinTest - 2020.11.02 at 15h 56m 07s.xml">
-      <configuration name="HashEquiJoinTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="HashEquiJoinTest - 2020.11.02 at 15h 56m 31s.xml">
-      <configuration name="HashEquiJoinTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="HashEquiJoinTest - 2020.11.02 at 16h 12m 41s.xml">
       <configuration name="HashEquiJoinTest" configurationId="JUnit" />
     </history-entry>
@@ -482,9 +425,30 @@
     <history-entry file="HashEquiJoinTest - 2020.11.02 at 16h 21m 22s.xml">
       <configuration name="HashEquiJoinTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="FilterTest - 2020.11.02 at 16h 21m 55s.xml">
+      <configuration name="FilterTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JoinTest_(1) - 2020.11.02 at 16h 22m 13s.xml">
+      <configuration name="JoinTest (1)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="HashEquiJoinTest_(1) - 2020.11.02 at 16h 22m 22s.xml">
+      <configuration name="HashEquiJoinTest (1)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="HashEquiJoinTest_(1) - 2020.11.02 at 21h 21m 31s.xml">
+      <configuration name="HashEquiJoinTest (1)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="HashEquiJoinTest - 2020.11.02 at 21h 21m 37s.xml">
+      <configuration name="HashEquiJoinTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="HashEquiJoinTest - 2020.11.02 at 21h 24m 05s.xml">
+      <configuration name="HashEquiJoinTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="HashEquiJoinTest_(1) - 2020.11.02 at 21h 24m 12s.xml">
+      <configuration name="HashEquiJoinTest (1)" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="216915000" />
+    <option name="totallyTimeSpent" value="218063000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -992,20 +956,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/simpledb/Tuple.java">
+    <entry file="file://$PROJECT_DIR$/src/java/simpledb/TupleDesc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/simpledb/HashEquiJoin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="e#1589#1615#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="151">
+          <caret line="142" column="47" lean-forward="true" selection-start-line="142" selection-start-column="47" selection-end-line="142" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -1016,10 +970,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/simpledb/TupleDesc.java">
+    <entry file="file://$PROJECT_DIR$/src/java/simpledb/Tuple.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="142" column="47" lean-forward="true" selection-start-line="142" selection-start-column="47" selection-end-line="142" selection-end-column="47" />
+        <state relative-caret-position="240">
+          <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/simpledb/HashEquiJoin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="157" column="31" lean-forward="true" selection-start-line="157" selection-start-column="31" selection-end-line="157" selection-end-column="31" />
+          <folding>
+            <element signature="e#1589#1615#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -60,20 +60,24 @@ public class HashEquiJoin extends Operator {
     public final static int MAP_SIZE = 20000;
 
     private boolean loadMap() throws DbException, TransactionAbortedException {
-        int cnt = 0;
+        int count = 0;
         map.clear();
         while (child1.hasNext()) {
             t1 = child1.next();
-            ArrayList<Tuple> list = map.get(t1.getField(pred.getField1()));
-            if (list == null) {
+            ArrayList<Tuple> list;
+            Field field = t1.getField(pred.getField1());
+            if (map.containsKey(field)) {
+                list = map.get(field);
+            } else {
                 list = new ArrayList<Tuple>();
-                map.put(t1.getField(pred.getField1()), list);
+                map.put(field, list);
             }
             list.add(t1);
-            if (cnt++ == MAP_SIZE)
+            count++;
+            if (count == MAP_SIZE)
                 return true;
         }
-        return cnt > 0;
+        return count > 0;
 
     }
     
