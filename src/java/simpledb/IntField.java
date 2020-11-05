@@ -11,10 +11,6 @@ public class IntField implements Field {
 	
 	private final int value;
 
-    public int getValue() {
-        return value;
-    }
-
     /**
      * Constructor.
      *
@@ -22,6 +18,10 @@ public class IntField implements Field {
      */
     public IntField(int i) {
         value = i;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public String toString() {
