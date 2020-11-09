@@ -1,5 +1,6 @@
 package simpledb;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 
 import java.util.ArrayList;
@@ -192,6 +193,10 @@ public class BufferPool {
             throws DbException, IOException, TransactionAbortedException {
         // some code goes here
         // not necessary for lab1
+        int tableId = t.getRecordId().getPageId().getTableId();
+        HeapFile table = (HeapFile) Database.getCatalog().getDatabaseFile(tableId);
+        ArrayList<Page> modifiedPage = table.deleteTuple(tid, t);
+        modifiedPage.get(0).markDirty(true, tid);
     }
 
     /**

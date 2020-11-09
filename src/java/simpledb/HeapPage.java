@@ -1,5 +1,6 @@
 package simpledb;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.io.*;
 
@@ -249,7 +250,23 @@ public class HeapPage implements Page {
     public void deleteTuple(Tuple t) throws DbException {
         // some code goes here
         // not necessary for lab1
-
+        boolean deleted = false;
+        if (!this.pid.equals(t.getRecordId().getPageId()))
+            throw new DbException("pid not matched");
+        for (int i = 0; i < this.numSlots; i++) {
+            int validBit = this.getValidBit(i);
+            boolean usedornot = this.isSlotUsed(i);
+            if (this.isSlotUsed(i)) {
+                if (this.tuples[i].equals(t)) {
+                    deleted = true;
+                    this.tuples[i] = null;
+                    this.markSlotUsed(i, false);
+                    break;
+                }
+            }
+        }
+        if (!deleted)
+            throw new DbException("cannot find the target tuple");
     }
 
     /**
@@ -262,6 +279,18 @@ public class HeapPage implements Page {
     public void insertTuple(Tuple t) throws DbException {
         // some code goes here
         // not necessary for lab1
+        boolean inserted = false;
+        for (int i = 0; i < this.numSlots; i++) {
+            if (!isSlotUsed(i)) {
+                this.tuples[i] = t;
+                t.setRecordId(new RecordId(this.getId(), i));
+                markSlotUsed(i, true);
+                inserted = true;
+                break;
+            }
+        }
+        if (!inserted)
+            throw new DbException("No free space to insert on this page");
     }
 
     /**
@@ -306,6 +335,8 @@ public class HeapPage implements Page {
         //需要将读取header bit的函数单独拆出，方便其他方法使用
         String validNum = String.format("%8s", Integer.toBinaryString(header[byteIndex]))
                 .replace(' ', '0');
+        if (i < 100)
+            validNum = validNum.substring(validNum.length() - 8);
         return Integer.parseInt(String.
                 valueOf(validNum.charAt(7-bitIndex)));
     }
@@ -324,6 +355,13 @@ public class HeapPage implements Page {
     private void markSlotUsed(int i, boolean value) {
         // some code goes here
         // not necessary for lab1
+        int byteIndex = i / 8;
+        int bitIndex = i % 8;
+        if (value) {
+            header[byteIndex] |= 1 << (bitIndex);
+        } else {
+            header[byteIndex] &= ~(1 << (bitIndex));
+        }
     }
 
     /**

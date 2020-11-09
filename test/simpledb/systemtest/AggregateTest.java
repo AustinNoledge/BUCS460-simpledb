@@ -85,7 +85,6 @@ public class AggregateTest extends SimpleDbTestBase {
                 aggregate(createdTuples, operation, 1, groupColumn);
 
         // validate that we get the answer
-        System.out.println(expected.toString());
         validateAggregate(table, operation, 1, groupColumn, expected);
     }
 
