@@ -149,7 +149,7 @@ public class HeapFile implements DbFile {
             TransactionAbortedException {
         // some code goes here
         // not necessary for lab1
-        ArrayList<Page> modifiedPages = null;
+        ArrayList<Page> modifiedPages = new ArrayList<>();
         PageId pageId = t.getRecordId().getPageId();
         // finding the corresoponding page
         if (pageId.pageNumber() < this.numPages()) {

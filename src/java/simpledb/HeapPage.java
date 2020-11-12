@@ -250,23 +250,13 @@ public class HeapPage implements Page {
     public void deleteTuple(Tuple t) throws DbException {
         // some code goes here
         // not necessary for lab1
-        boolean deleted = false;
-        if (!this.pid.equals(t.getRecordId().getPageId()))
-            throw new DbException("pid not matched");
-        for (int i = 0; i < this.numSlots; i++) {
-            int validBit = this.getValidBit(i);
-            boolean usedornot = this.isSlotUsed(i);
-            if (this.isSlotUsed(i)) {
-                if (this.tuples[i].equals(t)) {
-                    deleted = true;
-                    this.tuples[i] = null;
-                    this.markSlotUsed(i, false);
-                    break;
-                }
-            }
-        }
-        if (!deleted)
-            throw new DbException("cannot find the target tuple");
+        RecordId recordId = t.getRecordId();
+        if(!this.pid.equals(recordId.getPageId()))
+            throw new DbException("Tuple not in this page!");
+        if(!isSlotUsed(recordId.tupleno()))
+            throw new DbException("Tuple not in this page!");
+        // Mark slot as unused
+        markSlotUsed(recordId.tupleno(), false);
     }
 
     /**
